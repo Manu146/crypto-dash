@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = styled.a`
-  display: flex;
+  display: none;
   align-items: center;
   padding: 0.75rem;
   background-color: #d8f2fc;
@@ -11,6 +11,9 @@ const Container = styled.a`
   overflow: hidden;
   &:hover {
     background-color: #cce2eb;
+  }
+  @media only screen and (min-width: 768px) {
+    display: flex;
   }
 `;
 

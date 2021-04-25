@@ -4,6 +4,8 @@ import styled from "styled-components";
 const ItemLink = styled.a`
   display: flex;
   flex-wrap: nowrap;
+  flex-direction: column;
+  align-items: center;
   padding: 0.75rem;
   background-color: #fff;
   border-radius: 0.5rem;
@@ -20,10 +22,17 @@ const ItemLink = styled.a`
       fill: #3d3d3d;
     }
   }
+
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
 
 const Text = styled.span`
-  display: ${({ isOpen }) => (isOpen ? "inline" : "none")};
+  display: inline;
+  @media only screen and (min-width: 768px) {
+    display: ${({ isOpen }) => (isOpen ? "inline" : "none")};
+  }
 `;
 
 export default function SidebarItem({ item, isOpen }) {
