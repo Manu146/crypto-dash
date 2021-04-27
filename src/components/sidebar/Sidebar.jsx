@@ -22,12 +22,11 @@ const userInfo = {
 };
 
 const SidebarContainer = styled.nav`
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: ${({ isOpen }) => (isOpen ? "15rem" : "6rem")};
-  background-color: #fff;
-  border-right: 1px solid #cde8f1;
-  padding: 1rem;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-color: var(--light-bg-secondary);
+  border-top: 1px solid #cde8f1;
   display: flex;
   flex-direction: column;
   justify-content: center;

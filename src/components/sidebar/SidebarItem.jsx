@@ -1,16 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { StyledLink } from "../common/StyledLink";
 
-const ItemLink = styled.a`
+const ItemLink = styled(StyledLink)`
   display: flex;
   flex-wrap: nowrap;
-  padding: 0.75rem;
-  background-color: #fff;
-  border-radius: 0.5rem;
-  transition: background 0.2s ease-in;
-  &:hover {
-    background-color: #caf0ff;
-  }
+  flex-direction: column;
+  align-items: center;
 
   & i {
     display: inline-block;
