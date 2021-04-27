@@ -16,10 +16,17 @@ const ItemLink = styled(StyledLink)`
       fill: #3d3d3d;
     }
   }
+
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
 
 const Text = styled.span`
-  display: ${({ isOpen }) => (isOpen ? "inline" : "none")};
+  display: inline;
+  @media only screen and (min-width: 768px) {
+    display: ${({ isOpen }) => (isOpen ? "inline" : "none")};
+  }
 `;
 
 export default function SidebarItem({ item, isOpen }) {

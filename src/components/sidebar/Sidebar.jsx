@@ -29,24 +29,45 @@ const SidebarContainer = styled.nav`
   border-top: 1px solid #cde8f1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-  transition: flex-basis 0.3s ease-in;
+  @media only screen and (min-width: 768px) {
+    position: static;
+    padding: 0.5rem;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: ${({ isOpen }) => (isOpen ? "15rem" : "5rem")};
+    justify-content: center;
+    border-right: 1px solid #cde8f1;
+    overflow: hidden;
+    transition: flex-basis 0.3s ease-in;
+  }
 `;
 
 const SidebarUl = styled.ul`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 0.5rem;
   list-style: none;
-  margin-bottom: auto;
+  margin-bottom: 0;
+  & li {
+    flex: 1;
+  }
+  @media only screen and (min-width: 768px) {
+    & li {
+      flex: 0 1 auto;
+    }
+    flex-direction: column;
+    margin-bottom: auto;
+  }
 `;
 
 const SidebarHeader = styled.div`
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   margin-bottom: auto;
+  @media only screen and (min-width: 768px) {
+    display: flex;
+  }
 `;
 
 const LogoLink = styled.a`
