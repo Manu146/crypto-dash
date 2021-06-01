@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import useToggle from "../../custom-hooks/useToggle";
 import SidebarItem from "./SidebarItem";
 import UserCard from "./UserCard";
 import { ReactComponent as HomeIcon } from "../../icons/home.svg";
@@ -10,10 +9,10 @@ import { ReactComponent as SettingsIcon } from "../../icons/settings.svg";
 import { ReactComponent as SidebarArrow } from "../../icons/sidebar-arrow.svg";
 
 const sidebarItems = [
-  { text: "Home", icon: HomeIcon, path: "#" },
-  { text: "Transactions", icon: TransactionIcon, path: "#" },
-  { text: "Coins", icon: CoinsIcon, path: "#" },
-  { text: "Settings", icon: SettingsIcon, path: "#" },
+  { text: "Home", icon: HomeIcon, path: "/home" },
+  { text: "Transactions", icon: TransactionIcon, path: "/transactions" },
+  { text: "Coins", icon: CoinsIcon, path: "/coins" },
+  { text: "Settings", icon: SettingsIcon, path: "/settings" },
 ];
 
 const userInfo = {
@@ -25,20 +24,23 @@ const SidebarContainer = styled.nav`
   width: 100%;
   position: fixed;
   bottom: 0;
+  z-index: 999;
   background-color: var(--light-bg-secondary);
   border-top: 1px solid #cde8f1;
   display: flex;
   flex-direction: column;
   @media only screen and (min-width: 768px) {
-    position: static;
+    top: 0;
+    left: 0;
     padding: 0.5rem;
     flex-grow: 0;
     flex-shrink: 0;
-    flex-basis: ${({ isOpen }) => (isOpen ? "15rem" : "5rem")};
+    width: ${({ isOpen }) => (isOpen ? "15rem" : "5rem")};
+    //flex-basis: ${({ isOpen }) => (isOpen ? "15rem" : "5rem")};
     justify-content: center;
     border-right: 1px solid #cde8f1;
     overflow: hidden;
-    transition: flex-basis 0.3s ease-in;
+    transition: width 0.3s ease-in;
   }
 `;
 
@@ -101,8 +103,7 @@ const ToggleButton = styled.button`
   }
 `;
 
-export default function Sidebar() {
-  const [isOpen, toggle] = useToggle(false);
+export default function Sidebar({ isOpen, toggle }) {
   return (
     <SidebarContainer isOpen={isOpen}>
       <SidebarHeader>

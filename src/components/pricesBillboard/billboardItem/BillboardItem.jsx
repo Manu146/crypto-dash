@@ -5,11 +5,11 @@ export default function BillboardItem({ coin }) {
   return (
     <Container>
       <div>
-        <img src={"./coins-icons/" + coin.img} alt="" />
-        <span>{coin.name}</span>
+        <img src={coin.img} alt="" />
+        <span>{coin.abbreviation}</span>
       </div>
       <div>
-        <span>{coin.price}$</span>
+        <span>{coin.price}</span>
         <PercentageTag color={coin.percentage > 0 ? "limegreen" : "red"}>
           {coin.percentage}%
         </PercentageTag>

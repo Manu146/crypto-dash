@@ -33,7 +33,7 @@ export default function SidebarItem({ item, isOpen }) {
   const Icon = item.icon;
   return (
     <li>
-      <ItemLink href={item.path}>
+      <ItemLink to={item.path}>
         <i>
           <Icon />
         </i>

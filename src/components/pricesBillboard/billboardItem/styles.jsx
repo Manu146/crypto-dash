@@ -13,6 +13,10 @@ export const Container = styled(StyledLink)`
     span:first-child {
       margin-right: 0.5rem;
     }
+    img {
+      width: 1rem;
+      height: 1rem;
+    }
   }
   & span {
     font-weight: bold;

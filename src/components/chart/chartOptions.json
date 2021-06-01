@@ -1,0 +1,23 @@
+{
+  "width": 0,
+  "height": 320,
+  "rightPriceScale": {
+    "borderVisible": false
+  },
+  "timeScale": {
+    "borderVisible": false
+  },
+  "layout": {
+    "backgroundColor": "transparent",
+    "lineColor": "#2B2B43",
+    "textColor": "#3c4a5b"
+  },
+  "grid": {
+    "vertLines": {
+      "visible": false
+    },
+    "horzLines": {
+      "color": "#f0f3fa"
+    }
+  }
+}

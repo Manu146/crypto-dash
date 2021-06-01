@@ -9,14 +9,14 @@ const ScrollAnm = keyframes`
 export const SlideTrack = styled.div`
   position: absolute;
   display: flex;
-  animation: ${ScrollAnm} 30s linear infinite;
+  animation: ${ScrollAnm} 50s linear infinite;
   animation-play-state: running;
 `;
 
 export const Container = styled(DefaultContainer)`
   position: relative;
   overflow: hidden;
-  height: 6rem;
+  height: 5rem;
   width: 100%;
   &::before,
   &::after {
