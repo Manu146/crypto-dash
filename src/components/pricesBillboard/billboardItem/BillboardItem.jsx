@@ -3,7 +3,7 @@ import { Container, PercentageTag } from "./styles";
 
 export default function BillboardItem({ coin }) {
   return (
-    <Container>
+    <Container to={"/coins/" + coin.abbreviation}>
       <div>
         <img src={coin.img} alt="" />
         <span>{coin.abbreviation}</span>
