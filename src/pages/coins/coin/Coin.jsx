@@ -57,9 +57,9 @@ const Form = styled.form`
 
 const InputBox = styled.div`
   display: flex;
-  background-color: var(--light-bg-primary);
+  background-color: var(--light-bg-secondary);
   padding: 0.5rem;
-  border: 1px solid transparent;
+  border: 2px solid var(--light-bg-primary);
   border-radius: 0.75rem;
   align-items: center;
   margin-bottom: 0.5rem;
