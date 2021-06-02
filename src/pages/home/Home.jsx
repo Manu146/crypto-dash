@@ -164,9 +164,7 @@ export default function Home() {
       <h1>Welcome back, Caleb Dean!</h1>
       <PricesBillboard />
       <h2>Your portfolio</h2>
-      <DefaultContainer>
-        <LineChart data={data} options={{}} />
-      </DefaultContainer>
+      <LineChart data={data} options={{}} />
       <PortfolioCoins />
     </>
   );

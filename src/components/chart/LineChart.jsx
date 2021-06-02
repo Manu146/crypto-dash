@@ -1,9 +1,10 @@
 import React, { useRef, useEffect } from "react";
 import { createChart } from "lightweight-charts";
 import chartOptions from "./chartOptions.json";
-import useEventListener from "../../custom-hooks/useEventListener";
+import useResizeObserver from "../../custom-hooks/useResizeObserver";
+import { DefaultContainer } from "../layout/DefaultContainer";
 
-function debounce(callback, wait) {
+/*function debounce(callback, wait) {
   let timerId;
   return (...args) => {
     clearTimeout(timerId);
@@ -11,21 +12,14 @@ function debounce(callback, wait) {
       callback(...args);
     }, wait);
   };
-}
+}*/
 
 export default function LineChart({ data, lastValue }) {
   const chartContainer = useRef();
+  const parentContainer = useRef();
   const chart = useRef();
   const lineChart = useRef();
-  const handleResize = () => {
-    let padding = parseFloat(
-      getComputedStyle(chartContainer.current.parentElement).paddingLeft
-    );
-    let width = chartContainer.current.parentElement.clientWidth - padding * 2;
-    chart.current.applyOptions({ width });
-  };
-
-  useEventListener("resize", debounce(handleResize, 10));
+  const { width, height } = useResizeObserver(parentContainer);
 
   useEffect(() => {
     chart.current = createChart(chartContainer.current, chartOptions);
@@ -48,5 +42,13 @@ export default function LineChart({ data, lastValue }) {
     }
   }, [lastValue]);
 
-  return <div ref={chartContainer}></div>;
+  useEffect(() => {
+    chart.current.applyOptions({ width, height });
+  }, [width, height]);
+
+  return (
+    <DefaultContainer ref={parentContainer}>
+      <div ref={chartContainer}></div>
+    </DefaultContainer>
+  );
 }
