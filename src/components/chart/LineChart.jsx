@@ -19,7 +19,10 @@ export default function LineChart({ data, lastValue }) {
   const parentContainer = useRef();
   const chart = useRef();
   const lineChart = useRef();
-  const { width, height } = useResizeObserver(parentContainer);
+  const resizeCallback = ({ width, height }) => {
+    chart.current.applyOptions({ width, height });
+  };
+  const [width, height] = useResizeObserver(parentContainer, resizeCallback);
 
   useEffect(() => {
     chart.current = createChart(chartContainer.current, chartOptions);
@@ -41,10 +44,6 @@ export default function LineChart({ data, lastValue }) {
       lineChart.current.update(lastValue);
     }
   }, [lastValue]);
-
-  useEffect(() => {
-    chart.current.applyOptions({ width, height });
-  }, [width, height]);
 
   return (
     <DefaultContainer ref={parentContainer}>

@@ -1,29 +1,39 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useLayoutEffect, useCallback } from "react";
 
-const initialDimentions = {
-  width: 0,
-  height: 0,
-};
+export default function useResizeObserver(ref, callback) {
+  const [width, setWidth] = useState();
+  const [height, setHeight] = useState();
 
-export default function useResizeObserver(elRef) {
-  const [dimentions, setDimentions] = useState(initialDimentions);
+  const handleResize = useCallback(
+    (entries) => {
+      if (!Array.isArray(entries)) {
+        return;
+      }
 
-  const observer = useRef(
-    new ResizeObserver((entries) => {
-      const d = entries[0].contentRect;
-      setDimentions(d);
-    })
+      const entry = entries[0];
+      setWidth(entry.contentRect.width);
+      setHeight(entry.contentRect.height);
+
+      if (callback) {
+        callback(entry.contentRect);
+      }
+    },
+    [callback]
   );
 
-  useEffect(() => {
-    if (elRef.current) {
-      observer.current.observe(elRef.current);
+  useLayoutEffect(() => {
+    if (!ref.current) {
+      return;
     }
 
-    return () => {
-      observer.current.unobserve();
-    };
-  }, [elRef, observer]);
+    let RO = new ResizeObserver((entries) => handleResize(entries));
+    RO.observe(ref.current);
 
-  return dimentions;
+    return () => {
+      RO.disconnect();
+      RO = null;
+    };
+  }, [ref]);
+
+  return [width, height];
 }
