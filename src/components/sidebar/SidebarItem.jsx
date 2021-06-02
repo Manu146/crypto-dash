@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { StyledLink } from "../common/StyledLink";
+import { StyledNavLink } from "./styles.jsx";
 
-const ItemLink = styled(StyledLink)`
+const ItemLink = styled(StyledNavLink)`
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
@@ -11,10 +11,14 @@ const ItemLink = styled(StyledLink)`
   & i {
     display: inline-block;
     padding: 0 0.5rem;
+  }
 
-    & svg {
-      fill: #3d3d3d;
-    }
+  & svg {
+    fill: #3d3d3d;
+  }
+
+  &.active svg {
+    fill: var(--brand-color);
   }
 
   @media only screen and (min-width: 768px) {
@@ -33,7 +37,7 @@ export default function SidebarItem({ item, isOpen }) {
   const Icon = item.icon;
   return (
     <li>
-      <ItemLink to={item.path}>
+      <ItemLink exact to={item.path} activeClassName="active">
         <i>
           <Icon />
         </i>
