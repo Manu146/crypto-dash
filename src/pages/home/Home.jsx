@@ -1,10 +1,8 @@
-import React from "react";
 import { MainContainerWMargins } from "./styles";
 import { DefaultContainer } from "../../components/layout/DefaultContainer";
 import PricesBillboard from "../../components/pricesBillboard/PricesBillboard";
 import PortfolioCoins from "../../components/portfolioCoins/PortFolioCoins";
 import LineChart from "../../components/chart/LineChart";
-//import MyStockChart from "../../components/portfolioChart/MyChart";
 
 export default function Home() {
   const data = [
