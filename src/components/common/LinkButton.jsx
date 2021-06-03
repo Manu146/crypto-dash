@@ -38,7 +38,7 @@ const handleSize = (size) => {
       return "font-size: 0.75rem; padding: 0.5rem;";
 
     case "large":
-      return "font-size: 1rem; padding: 0.75rem; border-radius: 1.5rem;";
+      return "font-size: 1rem; padding: 0.75rem;;";
     default:
       return "font-size: 0.75rem; padding: 0.5rem;";
   }
@@ -54,6 +54,7 @@ const Wrapper = styled.button`
   cursor: pointer;
   ${({ size }) => handleSize(size)}
   ${({ color }) => handleColor(color)}
+  width: ${({ width }) => (width ? width + "%" : "auto")};
   &:disabled {
     background-color: #adadad;
     color: #5c5c5c;
