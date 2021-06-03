@@ -6,6 +6,7 @@ import { MainContainerWMargins } from "./components/layout/FlexLayout";
 import Home from "./pages/home/Home";
 import Coins from "./pages/coins/Coins";
 import Coin from "./pages/coins/coin/Coin.jsx";
+import Transactions from "./pages/transactions/Transactions";
 
 function App() {
   const [isOpen, toggle] = useToggle(false);
@@ -21,6 +22,9 @@ function App() {
             </Route>
             <Route path="/coins">
               <Coins />
+            </Route>
+            <Route path="/transactions">
+              <Transactions />
             </Route>
             <Route path="/home">
               <Home />
