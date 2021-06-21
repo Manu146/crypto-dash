@@ -1,7 +1,7 @@
 import { useState, useEffect, createContext, useCallback } from "react";
 import { ThemeProvider } from "styled-components";
 
-const ThemeContext = createContext();
+export const ThemeContext = createContext();
 
 const defaultTheme = { mode: "light" };
 
@@ -14,7 +14,7 @@ const saveThemeLocal = (theme) => {
   window.localStorage.setItem("theme", JSON.stringify(theme));
 };
 
-export default function ThemeContextProv() {
+export default function ThemeContextProv({ children }) {
   const [theme, setTheme] = useState();
   const switchTheme = useCallback(() => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
@@ -32,9 +32,9 @@ export default function ThemeContextProv() {
 
   return (
     <ThemeContext.Provider value={switchTheme}>
-      <ThemeProvider
-        theme={theme ? { mode: theme } : defaultTheme}
-      ></ThemeProvider>
+      <ThemeProvider theme={theme ? { mode: theme } : defaultTheme}>
+        {children}
+      </ThemeProvider>
     </ThemeContext.Provider>
   );
 }
