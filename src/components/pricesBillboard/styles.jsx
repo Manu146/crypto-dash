@@ -23,7 +23,9 @@ export const Container = styled(DefaultContainer)`
     content: "";
     background: linear-gradient(
       to right,
-      rgba(255, 255, 255, 1) 0%,
+      ${({ theme }) =>
+          theme.mode === "light" ? "#fff" : "var(--dark-bg-secondary)"}
+        0%,
       rgba(255, 255, 255, 0) 100%
     );
     position: absolute;
@@ -42,7 +44,9 @@ export const Container = styled(DefaultContainer)`
     right: 0;
     background: linear-gradient(
       to left,
-      rgba(255, 255, 255, 1) 0%,
+      ${({ theme }) =>
+          theme.mode === "light" ? "#fff" : "var(--dark-bg-secondary)"}
+        0%,
       rgba(255, 255, 255, 0) 100%
     );
   }

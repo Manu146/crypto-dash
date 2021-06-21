@@ -5,12 +5,16 @@ const Container = styled.a`
   display: none;
   align-items: center;
   padding: 0.75rem;
-  background-color: #d8f2fc;
+  background-color: ${({ theme }) =>
+    theme.mode === "light"
+      ? "var(--light-bg-secondary)"
+      : "var(--dark-bg-secondary)"};
   border-radius: 0.5rem;
   transition: background 0.2s ease-in;
   overflow: hidden;
   &:hover {
-    background-color: #cce2eb;
+    background-color: ${({ theme }) =>
+      theme.mode === "light" ? "#caf0ff" : "#2C2F49"};
   }
   @media only screen and (min-width: 768px) {
     display: flex;

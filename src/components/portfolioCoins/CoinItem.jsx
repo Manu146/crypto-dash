@@ -48,7 +48,10 @@ const PercentageTag = styled.span`
 `;
 
 const SecondaryTag = styled.span`
-  color: var(--light-secondary-text);
+  color: ${({ theme }) =>
+    theme.mode === "light"
+      ? "var(--light-secondary-text)"
+      : "var(--dark-secondary-text)"};
   display: block;
   font-weight: normal;
   font-size: 0.75rem;
@@ -56,7 +59,10 @@ const SecondaryTag = styled.span`
 
 const PrimaryTag = styled.span`
   display: block;
-  color: var(--light-primary-text);
+  color: ${({ theme }) =>
+    theme.mode === "light"
+      ? "var(--light-primary-text)"
+      : "var(--dark-primary-text)"};
   font-weight: 600;
 `;
 

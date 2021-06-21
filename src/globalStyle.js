@@ -5,10 +5,12 @@ export const GlobalStyle = createGlobalStyle`
 :root{
   --light-bg-primary: #f0f3f8; //#d8f2fc;
   --light-bg-secondary: #fff;
-  --dark-bg-primary: #111827;
-  --dark-bg-secondary: #1f2937;
+  --dark-bg-primary: #07041C;
+  --dark-bg-secondary: #13132B;
   --light-primary-text: #3c4a5b;
   --light-secondary-text: #68778d;
+  --dark-primary-text: #DADBE0;
+  --dark-secondary-text: #c1c2c7;
   --brand-color: #EF8354;
 }
 
@@ -21,7 +23,10 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 h1, h2, h3, h4, h5, span{
-  color: var(--light-primary-text);
+  color: ${({ theme }) =>
+    theme.mode === "light"
+      ? "var(--light-primary-text)"
+      : "var(--dark-primary-text)"};
 }
 
 * {
@@ -31,12 +36,18 @@ h1, h2, h3, h4, h5, span{
 }
 
 body{
-    background-color: var(--light-bg-primary);
+    background-color: ${({ theme }) =>
+      theme.mode === "light"
+        ? "var(--light-bg-primary)"
+        : "var(--dark-bg-primary)"};
 }
 
 a{
   text-decoration: none;
-  color: var(--light-primary-text);
+  color: ${({ theme }) =>
+    theme.mode === "light"
+      ? "var(--light-primary-text)"
+      : "var(--dark-primary-text)"};
 }
 
 button{

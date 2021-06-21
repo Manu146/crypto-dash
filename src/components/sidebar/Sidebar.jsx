@@ -1,7 +1,7 @@
-import React from "react";
 import styled from "styled-components";
 import SidebarItem from "./SidebarItem";
 import UserCard from "./UserCard";
+import ThemeToggler from "./ThemeToggler";
 import { ReactComponent as HomeIcon } from "../../icons/home.svg";
 import { ReactComponent as TransactionIcon } from "../../icons/transaction.svg";
 import { ReactComponent as CoinsIcon } from "../../icons/coins.svg";
@@ -25,7 +25,10 @@ const SidebarContainer = styled.nav`
   position: fixed;
   bottom: 0;
   z-index: 999;
-  background-color: var(--light-bg-secondary);
+  background-color: ${({ theme }) =>
+    theme.mode === "light"
+      ? "var(--light-bg-secondary)"
+      : "var(--dark-bg-secondary)"};
   border-top: 1px solid #cde8f1;
   display: flex;
   flex-direction: column;
@@ -38,7 +41,8 @@ const SidebarContainer = styled.nav`
     width: ${({ isOpen }) => (isOpen ? "15rem" : "5rem")};
     //flex-basis: ${({ isOpen }) => (isOpen ? "15rem" : "5rem")};
     justify-content: center;
-    border-right: 1px solid #cde8f1;
+    border-right: 1px solid
+      ${({ theme }) => (theme.mode === "light" ? "#cde8f1" : "#0d131f")};
     overflow: hidden;
     transition: width 0.3s ease-in;
   }
@@ -81,14 +85,17 @@ const LogoLink = styled.a`
 `;
 
 const ToggleButton = styled.button`
-  color: #3d3d3d;
   padding: 0.75rem;
-  background-color: #fff;
+  background-color: ${({ theme }) =>
+    theme.mode === "light"
+      ? "var(--light-bg-secondary)"
+      : "var(--dark-bg-secondary)"};
   border-radius: 0.5rem;
   margin-left: ${({ isOpen }) => (isOpen ? "10rem" : "0")};
   transition: background 0.2s ease-in, margin-left 0.3s ease-in;
   &:hover {
-    background-color: #caf0ff;
+    background-color: ${({ theme }) =>
+      theme.mode === "light" ? "#caf0ff" : "#2C2F49"};
   }
 
   & i {
@@ -98,7 +105,7 @@ const ToggleButton = styled.button`
     padding: 0 0.5rem;
 
     & svg {
-      fill: #3d3d3d;
+      fill: ${({ theme }) => (theme.mode === "light" ? "#3d3d3d" : "#9289DE")};
     }
   }
 `;
@@ -121,6 +128,7 @@ export default function Sidebar({ isOpen, toggle }) {
           <SidebarItem key={index} item={item} isOpen={isOpen} />
         ))}
       </SidebarUl>
+      <ThemeToggler />
       <UserCard userInfo={userInfo} isOpen={isOpen} />
     </SidebarContainer>
   );

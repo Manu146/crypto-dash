@@ -6,9 +6,16 @@ import LoadingDots from "../loadingDots/LoadingDots";
 
 const InputBox = styled.div`
   display: flex;
-  background-color: var(--light-bg-secondary);
+  background-color: ${({ theme }) =>
+    theme.mode === "light"
+      ? "var(--light-bg-secondary)"
+      : "var(--dark-bg-secondary)"};
   padding: 0.5rem 1rem;
-  border: 2px solid var(--light-bg-primary);
+  border: 2px solid
+    ${({ theme }) =>
+      theme.mode === "light"
+        ? "var(--light-bg-primary)"
+        : "var(--dark-bg-primary)"};
   border-radius: 0.75rem;
   align-items: center;
   margin-bottom: 0.5rem;
@@ -25,7 +32,14 @@ const SelectLabel = styled.label`
   top: -0.75rem;
   right: 1.5rem;
   font-size: 0.75rem;
-  background-color: white;
+  color: ${({ theme }) =>
+    theme.mode === "light"
+      ? "var(--light-primary-text)"
+      : "var(--dark-primary-text)"};
+  background-color: ${({ theme }) =>
+    theme.mode === "light"
+      ? "var(--light-bg-secondary)"
+      : "var(--dark-bg-secondary)"};
   padding: 0.25rem;
 `;
 
@@ -34,7 +48,14 @@ const InputLabel = styled.label`
   top: -0.75rem;
   left: 1rem;
   font-size: 0.75rem;
-  background-color: white;
+  color: ${({ theme }) =>
+    theme.mode === "light"
+      ? "var(--light-primary-text)"
+      : "var(--dark-primary-text)"};
+  background-color: ${({ theme }) =>
+    theme.mode === "light"
+      ? "var(--light-bg-secondary)"
+      : "var(--dark-bg-secondary)"};
   padding: 0.25rem;
 `;
 
@@ -46,7 +67,10 @@ const List = styled.ul`
   position: absolute;
   top: 100%;
   z-index: 2;
-  background-color: var(--light-bg-secondary);
+  background-color: ${({ theme }) =>
+    theme.mode === "light"
+      ? "var(--light-bg-secondary)"
+      : "var(--dark-bg-secondary)"};
   border-radius: 0 0 0.75rem 0.75rem;
   overflow: hidden;
 `;
@@ -55,8 +79,15 @@ const ListContainer = styled.div`
   position: relative;
   width: 14rem;
   min-height: 3rem;
-  border-left: 2px solid var(--light-bg-primary);
-  background-color: var(--light-bg-secondary);
+  border-left: 2px solid
+    ${({ theme }) =>
+      theme.mode === "light"
+        ? "var(--light-bg-primary)"
+        : "var(--dark-bg-primary)"};
+  background-color: ${({ theme }) =>
+    theme.mode === "light"
+      ? "var(--light-bg-secondary)"
+      : "var(--dark-bg-secondary)"};
   display: flex;
   align-items: center;
   ${List} {
@@ -88,9 +119,15 @@ const OptionButton = styled.button`
   padding: 1rem;
   display: flex;
   align-items: center;
-  background-color: var(--light-bg-secondary);
+  background-color: ${({ theme }) =>
+    theme.mode === "light"
+      ? "var(--light-bg-secondary)"
+      : "var(--dark-bg-secondary)"};
   &:hover {
-    background-color: var(--light-bg-primary);
+    background-color: ${({ theme }) =>
+      theme.mode === "light"
+        ? "var(--light-bg-primary)"
+        : "var(--dark-bg-primary)"};
   }
 
   & img {
@@ -103,6 +140,10 @@ const Input = styled.input`
   border: none;
   flex-grow: 1;
   background-color: transparent;
+  color: ${({ theme }) =>
+    theme.mode === "light"
+      ? "var(--light-primary-text)"
+      : "var(--dark-primary-text)"};
   &:focus {
     outline: none;
   }

@@ -4,16 +4,6 @@ import chartOptions from "./chartOptions.json";
 import useResizeObserver from "../../custom-hooks/useResizeObserver";
 import { DefaultContainer } from "../layout/DefaultContainer";
 
-/*function debounce(callback, wait) {
-  let timerId;
-  return (...args) => {
-    clearTimeout(timerId);
-    timerId = setTimeout(() => {
-      callback(...args);
-    }, wait);
-  };
-}*/
-
 export default function LineChart({ data, lastValue }) {
   const chartContainer = useRef();
   const parentContainer = useRef();
