@@ -31,7 +31,7 @@ export default function ThemeContextProv({ children }) {
   }, [theme]);
 
   return (
-    <ThemeContext.Provider value={switchTheme}>
+    <ThemeContext.Provider value={{ switchTheme, theme }}>
       <ThemeProvider theme={theme ? { mode: theme } : defaultTheme}>
         {children}
       </ThemeProvider>
