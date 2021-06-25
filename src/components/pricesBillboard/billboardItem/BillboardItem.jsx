@@ -1,5 +1,6 @@
-import React from "react";
 import { Container, PercentageTag } from "./styles";
+import { ReactComponent as Up } from "../../../icons/arrow-drop-up.svg";
+import { ReactComponent as Down } from "../../../icons/arrow-drop-down.svg";
 
 export default function BillboardItem({ coin }) {
   return (
@@ -11,6 +12,7 @@ export default function BillboardItem({ coin }) {
       <div>
         <span>{coin.price}</span>
         <PercentageTag color={coin.percentage > 0 ? "limegreen" : "red"}>
+          {coin.percentage > 0 ? <Up /> : <Down />}
           {coin.percentage}%
         </PercentageTag>
       </div>

@@ -25,4 +25,16 @@ export const Container = styled(StyledLink)`
 
 export const PercentageTag = styled.span`
   color: ${({ color }) => color};
+  font-weight: 600;
+  margin-left: 0.5rem;
+  font-size: 0.75rem;
+  position: relative;
+  padding-left: 1rem;
+  & svg {
+    fill: ${({ color }) => color};
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -4px;
+  }
 `;
