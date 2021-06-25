@@ -1,11 +1,8 @@
 import { useState } from "react";
-export default function useFormValidation({
-  dataObject,
-  validations,
-  onSubmit,
-}) {
+export default function useFormValidation(dataObject, validations, onSubmit) {
   const [errors, setErrors] = useState({});
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (validations && Object.keys(validations).length > 0) {
       let valid = true;
       let newErrors = {};
