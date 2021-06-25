@@ -27,7 +27,7 @@ export default function useFormValidation(dataObject, validations, onSubmit) {
         if (
           custom?.isValid &&
           typeof custom.isValid === "function" &&
-          !isValid(value)
+          !custom.isValid(value)
         ) {
           valid = false;
           newErrors[key] = custom?.message;
@@ -37,11 +37,9 @@ export default function useFormValidation(dataObject, validations, onSubmit) {
           setErrors(newErrors);
           return;
         }
-
-        setErrors({});
-
-        typeof onSubmit === "function" && onSubmit();
       }
+      setErrors({});
+      typeof onSubmit === "function" && onSubmit();
     }
   };
   return { handleSubmit, errors };
