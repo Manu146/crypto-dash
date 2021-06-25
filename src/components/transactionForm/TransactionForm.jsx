@@ -86,6 +86,14 @@ export default function TransactionForm({ userAccounts, networks }) {
       })
   );
 
+  useEffect(() => {
+    setAmount("0");
+  }, [userAccount]);
+
+  useEffect(() => {
+    setAccount("");
+  }, [network]);
+
   let accountOptions = userAccounts?.filter((account) => {
     if (!userAccount) return account;
     return account.name !== userAccount.name;
