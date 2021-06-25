@@ -12,23 +12,9 @@ import {
   BalanceTag,
   StyledForm,
 } from "./styles";
+import CurrencyInput from "./CurrencyInput/CurrencyInput";
 import LinkButton from "../common/LinkButton";
 import LoadingDots from "../loadingDots/LoadingDots";
-
-const formatAmmount = (numberString) => {
-  let sanitized = numberString.replace(/[^\d\.]+/g, "");
-  return parseFloat(sanitized).toLocaleString("en-US", {
-    style: "decimal",
-    maximumFractionDigits: 8,
-    minimumFractionDigits: 0,
-  });
-  //return numberString.replace(",",".");
-};
-
-const keepSelectionPos = (prevPos, inputRef) => {
-  if (!inputRef) return;
-  inputRef.current.setSelectionRange(prevPos, prevPos);
-};
 
 export default function TransactionForm({ userAccounts, networks }) {
   const [userAccount, setUserAccount] = useState();
@@ -36,7 +22,7 @@ export default function TransactionForm({ userAccounts, networks }) {
 
   const [network, setNetwork] = useState();
   const [account, setAccount] = useState("");
-  const amountRef = useRef();
+
   let accountOptions = userAccounts?.filter((account) => {
     if (!userAccount) return account;
     return account.name !== userAccount.name;
@@ -45,25 +31,17 @@ export default function TransactionForm({ userAccounts, networks }) {
     if (!network) return networkOpt;
     return networkOpt.name !== network.name;
   });
-  useEffect(() => {
-    amountRef.current.setSelectionRange(1, 1);
-  }, [amount]);
   return (
     <StyledForm>
       <h1>Send funds to others</h1>
       <DefaultContainer>
         <InputBox>
           <InputLabel>Amount</InputLabel>
-          <Input
+          <CurrencyInput
             name="amount"
-            ref={amountRef}
             disabled={!userAccount}
             value={amount}
-            onChange={(e) => {
-              let prevPos = amountRef.current.selectionStart;
-              setAmount(formatAmmount(e.target.value));
-              keepSelectionPos(prevPos, amountRef);
-            }}
+            onChange={(e) => setAmount(e.target.value)}
           />
           <SelectLabel>From</SelectLabel>
           <ListContainer>
