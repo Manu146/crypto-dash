@@ -32,12 +32,13 @@ export default function useFormValidation(dataObject, validations, onSubmit) {
           valid = false;
           newErrors[key] = custom?.message;
         }
-
-        if (!valid) {
-          setErrors(newErrors);
-          return;
-        }
       }
+
+      if (!valid) {
+        setErrors(newErrors);
+        return;
+      }
+
       setErrors({});
       typeof onSubmit === "function" && onSubmit();
     }
