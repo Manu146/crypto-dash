@@ -164,3 +164,10 @@ export const StyledForm = styled.form`
     margin-bottom: 2rem;
   }
 `;
+
+export const ErrorSpan = styled.span`
+  color: red;
+  font-size: 0.75rem;
+  position: absolute;
+  top: calc(100% + 2px);
+`;
