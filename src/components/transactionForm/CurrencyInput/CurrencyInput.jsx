@@ -1,6 +1,6 @@
 import MaskedInput from "react-text-mask";
 import createNumberMask from "text-mask-addons/dist/createNumberMask";
-import styled from "styled-components";
+//import styled from "styled-components";
 import { Input } from "../styles";
 
 const defaultMaskOptions = {
@@ -24,7 +24,8 @@ const CurrencyInput = ({ maskOptions, ...props }) => {
   return (
     <MaskedInput
       mask={currencyMask}
-      render={(ref) => <Input ref={ref} {...props} />}
+      {...props}
+      render={(ref, props) => <Input ref={ref} {...props} />}
     />
   );
 };
