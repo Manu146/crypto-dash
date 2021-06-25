@@ -1,15 +1,14 @@
-import React from "react";
-import "./style.css";
+import { Spinner, Dot } from "./styles";
 
 export default function LoadingSpinner() {
   return (
-    <div className="sk-chase">
-      <div className="sk-chase-dot"></div>
-      <div className="sk-chase-dot"></div>
-      <div className="sk-chase-dot"></div>
-      <div className="sk-chase-dot"></div>
-      <div className="sk-chase-dot"></div>
-      <div className="sk-chase-dot"></div>
-    </div>
+    <Spinner>
+      <Dot></Dot>
+      <Dot></Dot>
+      <Dot></Dot>
+      <Dot></Dot>
+      <Dot></Dot>
+      <Dot></Dot>
+    </Spinner>
   );
 }
