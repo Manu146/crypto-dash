@@ -1,24 +1,10 @@
 import MaskedInput from "react-text-mask";
 import createNumberMask from "text-mask-addons/dist/createNumberMask";
 import styled from "styled-components";
-
-const StyledMaskedInput = styled(MaskedInput)`
-  border: none;
-  flex-grow: 1;
-  background-color: transparent;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: ${({ theme }) =>
-    theme.mode === "light"
-      ? "var(--light-primary-text)"
-      : "var(--dark-primary-text)"};
-  &:focus {
-    outline: none;
-  }
-  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "text")};
-`;
+import { Input } from "../styles";
 
 const defaultMaskOptions = {
+  prefix: "",
   includeThousandsSeparator: true,
   thousandsSeparatorSymbol: ",",
   allowDecimal: true,
@@ -29,13 +15,18 @@ const defaultMaskOptions = {
   allowLeadingZeroes: true,
 };
 
-const CurrencyInput = ({ maskOptions, ...inputProps }) => {
+const CurrencyInput = ({ maskOptions, ...props }) => {
   const currencyMask = createNumberMask({
     ...defaultMaskOptions,
     ...maskOptions,
   });
 
-  return <StyledMaskedInput mask={currencyMask} {...inputProps} />;
+  return (
+    <MaskedInput
+      mask={currencyMask}
+      render={(ref) => <Input ref={ref} {...props} />}
+    />
+  );
 };
 
 export default CurrencyInput;
