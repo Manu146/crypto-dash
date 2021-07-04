@@ -7,6 +7,9 @@ import { ReactComponent as TransactionIcon } from "../../icons/transaction.svg";
 import { ReactComponent as CoinsIcon } from "../../icons/coins.svg";
 import { ReactComponent as SettingsIcon } from "../../icons/settings.svg";
 import { ReactComponent as SidebarArrow } from "../../icons/sidebar-arrow.svg";
+import { useSelector } from "react-redux";
+import { authSelector } from "../../redux/auth/authSlice";
+import useIsAuthenticated from "../../custom-hooks/useIsAuthenticated";
 
 const sidebarItems = [
   { text: "Home", icon: HomeIcon, path: "/home" },
@@ -14,11 +17,6 @@ const sidebarItems = [
   { text: "Coins", icon: CoinsIcon, path: "/coins" },
   { text: "Settings", icon: SettingsIcon, path: "/settings" },
 ];
-
-const userInfo = {
-  img: "https://randomuser.me/api/portraits/men/71.jpg",
-  username: "Caleb Dean",
-};
 
 const SidebarContainer = styled.nav`
   width: 100%;
@@ -38,7 +36,6 @@ const SidebarContainer = styled.nav`
     flex-grow: 0;
     flex-shrink: 0;
     width: ${({ isOpen }) => (isOpen ? "15rem" : "5rem")};
-    //flex-basis: ${({ isOpen }) => (isOpen ? "15rem" : "5rem")};
     justify-content: center;
     border-right: 1px solid
       ${({ theme }) => (theme.mode === "light" ? "#cde8f1" : "#0d131f")};
@@ -110,6 +107,8 @@ const ToggleButton = styled.button`
 `;
 
 export default function Sidebar({ isOpen, toggle }) {
+  const authData = useSelector(authSelector);
+  const isAuth = useIsAuthenticated();
   return (
     <SidebarContainer isOpen={isOpen}>
       <SidebarHeader>
@@ -128,7 +127,15 @@ export default function Sidebar({ isOpen, toggle }) {
         ))}
       </SidebarUl>
       <ThemeToggler />
-      <UserCard userInfo={userInfo} isOpen={isOpen} />
+      {isAuth && (
+        <UserCard
+          userInfo={{
+            img: "https://randomuser.me/api/portraits/men/71.jpg",
+            ...authData,
+          }}
+          isOpen={isOpen}
+        />
+      )}
     </SidebarContainer>
   );
 }
