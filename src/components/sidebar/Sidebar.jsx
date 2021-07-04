@@ -29,7 +29,6 @@ const SidebarContainer = styled.nav`
     theme.mode === "light"
       ? "var(--light-bg-secondary)"
       : "var(--dark-bg-secondary)"};
-  border-top: 1px solid #cde8f1;
   display: flex;
   flex-direction: column;
   @media only screen and (min-width: 768px) {
