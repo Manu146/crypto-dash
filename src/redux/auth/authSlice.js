@@ -6,15 +6,14 @@ const initialState = {
   error: null,
 };
 
-const user = { username: "usertest1", password: "123456." };
+const user = { email: "user1@test.com", password: "123456." };
 const userData = { id: 1, username: "usertest1" };
 
-const fakeLogin = ({ username, password }) => {
-  console.log(username, password);
+const fakeLogin = ({ email, password }) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (username !== user.username || password !== user.password)
-        reject("Username or password incorrect");
+      if (email !== user.email || password !== user.password)
+        reject("Email or password incorrect");
       resolve(userData);
     }, 2000);
   });
