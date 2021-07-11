@@ -66,27 +66,27 @@ const PrimaryTag = styled.span`
   font-weight: 600;
 `;
 
-export default function CoinItem({ coinData }) {
+export default function CoinItem({ coin }) {
   return (
     <li>
-      <ContainerLink to={"/coins/" + coinData.name}>
-        <Img src={coinData.img} alt="" />
+      <ContainerLink to={"/coins/" + coin.currency}>
+        <Img src={coin.img} alt="" />
         <Wrapper>
           <div>
-            <PrimaryTag>{coinData.name}</PrimaryTag>
+            <PrimaryTag>{coin.name}</PrimaryTag>
             <FlexContainer>
-              <SecondaryTag>{coinData.price}</SecondaryTag>
-              <PercentageTag
-                color={coinData.percentage > 0 ? "limegreen" : "red"}
-              >
-                {coinData.percentage > 0 ? <Up /> : <Down />}
-                {coinData.percentage}%
+              <SecondaryTag>{"$" + coin.price}</SecondaryTag>
+              <PercentageTag color={coin.change >= 0 ? "limegreen" : "red"}>
+                {coin.change >= 0 ? <Up /> : <Down />}
+                {coin.change}%
               </PercentageTag>
             </FlexContainer>
           </div>
           <div>
-            <PrimaryTag>{coinData.usd_eq}</PrimaryTag>
-            <SecondaryTag>{coinData.ammount}</SecondaryTag>
+            <PrimaryTag>
+              {"$" + (coin.amount * coin.price).toFixed(2)}
+            </PrimaryTag>
+            <SecondaryTag>{coin.amount}</SecondaryTag>
           </div>
         </Wrapper>
       </ContainerLink>
