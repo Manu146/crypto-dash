@@ -4,16 +4,19 @@ import { ReactComponent as Down } from "../../../icons/arrow-drop-down.svg";
 
 export default function BillboardItem({ coin }) {
   return (
-    <Container to={"/coins/" + coin.abbreviation}>
+    <Container to={"/coins/" + coin.currency}>
       <div>
-        <img src={coin.img} alt="" />
-        <span>{coin.abbreviation}</span>
+        <img
+          src={`./coins-icons/svg/${coin.currency.toLowerCase()}.svg`}
+          alt=""
+        />
+        <span>{coin.currency}</span>
       </div>
       <div>
-        <span>{coin.price}</span>
-        <PercentageTag color={coin.percentage > 0 ? "limegreen" : "red"}>
-          {coin.percentage > 0 ? <Up /> : <Down />}
-          {coin.percentage}%
+        <span>{"$" + coin.price}</span>
+        <PercentageTag color={coin.change >= 0 ? "limegreen" : "red"}>
+          {coin.change >= 0 ? <Up /> : <Down />}
+          {coin.change}%
         </PercentageTag>
       </div>
     </Container>

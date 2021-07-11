@@ -9,8 +9,7 @@ export const Container = styled(StyledLink)`
   & > div {
     display: flex;
     align-items: center;
-    img,
-    span:first-child {
+    img {
       margin-right: 0.5rem;
     }
     img {

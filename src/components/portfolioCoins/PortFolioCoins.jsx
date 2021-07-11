@@ -1,13 +1,14 @@
-import React from "react";
 import styled from "styled-components";
 import { DefaultContainer } from "../layout/DefaultContainer";
 //import { StyledLink } from "../common/StyledLink";
 import CoinItem from "./CoinItem";
+import { useSelector } from "react-redux";
+import { balancesSelector } from "../../redux/balance/balanceSlice";
+import { ratesSelector } from "../../redux/rates/ratesSlice";
 
 const CoinsList = styled.ul`
   list-style: none;
   column-count: 1;
-  //column-gap: 1rem;
   & li {
     -webkit-column-break-inside: avoid;
     page-break-inside: avoid;
@@ -83,11 +84,13 @@ const data = [
 ];
 
 export default function PortFolioCoins() {
+  const rates = useSelector(ratesSelector);
+  const balances = useSelector(balancesSelector);
   return (
     <DefaultContainer>
       <CoinsList>
-        {data.map((coin, index) => (
-          <CoinItem coinData={coin} key={index} />
+        {balances.map((coin, index) => (
+          <CoinItem coin={{ ...coin, ...rates[coin.currency] }} key={index} />
         ))}
       </CoinsList>
     </DefaultContainer>
