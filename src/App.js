@@ -36,7 +36,7 @@ function App() {
           </Router>
         </div>
       </ThemeContextProv>
-      <ThemedToaster />
+      <ThemedToaster position="top-right" />
     </Provider>
   );
 }
