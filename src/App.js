@@ -1,3 +1,4 @@
+import ThemedToaster from "./components/themedToaster/ThemedToaster";
 import { GlobalStyle } from "./globalStyle";
 import useToggle from "./custom-hooks/useToggle";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -35,6 +36,7 @@ function App() {
           </Router>
         </div>
       </ThemeContextProv>
+      <ThemedToaster />
     </Provider>
   );
 }
