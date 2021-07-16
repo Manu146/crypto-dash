@@ -74,7 +74,7 @@ export const List = styled.ul`
 
 export const ListContainer = styled.div`
   position: relative;
-  width: 14rem;
+  width: 16rem;
   min-height: 3rem;
   border-left: 2px solid
     ${({ theme }) =>
@@ -96,6 +96,9 @@ export const ListContainer = styled.div`
 
   span {
     display: inline-block;
+  }
+
+  & > span {
     padding: 0 1rem;
   }
 `;
@@ -104,9 +107,12 @@ export const SelectedOption = styled.div`
   padding: 0 1rem;
   display: flex;
   align-items: center;
-  & img {
+  img {
     width: 2rem;
     height: 2rem;
+  }
+  & > span {
+    padding: 0 1rem;
   }
 `;
 
@@ -127,7 +133,16 @@ export const OptionButton = styled.button`
         : "var(--dark-bg-primary)"};
   }
 
-  & img {
+  justify-content: space-between;
+  div {
+    display: flex;
+    align-items: center;
+    span {
+      padding-left: 1rem;
+    }
+  }
+
+  img {
     width: 2rem;
     height: 2rem;
   }
