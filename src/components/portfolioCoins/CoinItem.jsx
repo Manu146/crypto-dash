@@ -66,6 +66,12 @@ const PrimaryTag = styled.span`
   font-weight: 600;
 `;
 
+const formatNumberView = (n) =>
+  n.toLocaleString("en-US", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 8,
+  });
+
 export default function CoinItem({ coin }) {
   return (
     <li>
@@ -86,7 +92,7 @@ export default function CoinItem({ coin }) {
             <PrimaryTag>
               {"$" + (coin.amount * coin.price).toFixed(2)}
             </PrimaryTag>
-            <SecondaryTag>{coin.amount}</SecondaryTag>
+            <SecondaryTag>{formatNumberView(coin.amount)}</SecondaryTag>
           </div>
         </Wrapper>
       </ContainerLink>
