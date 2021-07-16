@@ -17,6 +17,9 @@ import {
 import CurrencyInput from "./CurrencyInput/CurrencyInput";
 import LinkButton from "../common/LinkButton";
 import LoadingDots from "../loadingDots/LoadingDots";
+import { reduceBalance } from "../../redux/balance/balanceSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { balancesSelector } from "../../redux/balance/balanceSlice";
 
 const validations = {
   userAccount: {
@@ -53,11 +56,16 @@ const validations = {
 };
 
 export default function TransactionForm({ userAccounts, networks }) {
+  const dispatch = useDispatch();
   const [userAccount, setUserAccount] = useState();
   const [amount, setAmount] = useState("");
+  const balances = useSelector(balancesSelector);
 
   const [network, setNetwork] = useState();
   const [account, setAccount] = useState("");
+
+  let selectedBalance =
+    userAccount && balances.filter((balance) => balance.id === userAccount)[0];
 
   validations.account.custom.isValid = (account) => {
     const netsRegex = {
@@ -67,36 +75,46 @@ export default function TransactionForm({ userAccounts, networks }) {
       CryptoDashNetwork:
         /^[A-Za-z0-9!#$%&“”+/=?^_{}|~,():;<>[]-.]*@[A-Za-z0-9-]*.[A-Za-z]+(?:.[A-Za-z]+)?(?:.[A-Za-z]+)?$/,
     };
-    return RegExp(netsRegex[network.name.replace(" ", "")]).test(account);
+    return RegExp(netsRegex[network?.name.replace(" ", "")]).test(account);
   };
 
   validations.amount.custom.isValid = (amount) => {
-    return amount > 0 && amount <= userAccount.balance;
+    return amount > 0 && amount <= selectedBalance.amount;
   };
 
+  const submitTransaction = (payload) => {
+    dispatch(reduceBalance(payload));
+  };
+
+  const formatNumberView = (n) =>
+    n.toLocaleString("en-US", {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 8,
+    });
+
   const { handleSubmit, errors } = useFormValidation(
-    { userAccount: userAccount?.name, amount, network: network?.name, account },
+    { userAccount: userAccount, amount, network: network?.name, account },
     validations,
     () =>
-      console.log({
-        userAccount: userAccount.name,
-        amount,
+      submitTransaction({
+        account: userAccount,
+        amount: parseFloat(amount),
         network: network.name,
-        account,
+        destAccount: account,
       })
   );
 
   useEffect(() => {
-    setAmount("0");
+    setAmount("");
   }, [userAccount]);
 
   useEffect(() => {
     setAccount("");
   }, [network]);
 
-  let accountOptions = userAccounts?.filter((account) => {
+  let accountOptions = balances?.filter((account) => {
     if (!userAccount) return account;
-    return account.name !== userAccount.name;
+    return account.id !== userAccount;
   });
   let networkOptions = networks?.filter((networkOpt) => {
     if (!network) return networkOpt;
@@ -118,31 +136,34 @@ export default function TransactionForm({ userAccounts, networks }) {
           />
           <SelectLabel>From</SelectLabel>
           <ListContainer>
-            {!userAccount && userAccounts && <span>Select account</span>}
+            {!userAccount && balances && <span>Select account</span>}
             {userAccount && (
               <SelectedOption>
-                <img src={userAccount.img} alt={userAccount.currency} />
-                <span>{userAccount.name}</span>
+                <img src={selectedBalance.img} alt={selectedBalance.currency} />
+                <span>{selectedBalance.name}</span>
                 <BalanceTag>
-                  {userAccount.balance} {userAccount.currency}
+                  {formatNumberView(selectedBalance.amount) + " "}
+                  {selectedBalance.currency}
                 </BalanceTag>
               </SelectedOption>
             )}
-            {!userAccounts && <LoadingDots />}
+            {!balances && <LoadingDots />}
             <List>
               {accountOptions &&
-                accountOptions.map((account, index) => (
-                  <li key={index}>
+                accountOptions.map((account) => (
+                  <li key={account.id}>
                     <OptionButton
                       onClick={(e) => {
                         e.preventDefault();
-                        setUserAccount(account);
+                        setUserAccount(account.id);
                       }}
                     >
-                      <img src={account.img} alt={account.currency} />
-                      <span>{account.name}</span>
+                      <div>
+                        <img src={account.img} alt={account.currency} />
+                        <span>{account.name}</span>
+                      </div>
                       <BalanceTag>
-                        {account.balance} {account.currency}
+                        {formatNumberView(account.amount)} {account.currency}
                       </BalanceTag>
                     </OptionButton>
                   </li>
