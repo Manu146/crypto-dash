@@ -13,7 +13,6 @@ import Coins from "./pages/coins/Coins";
 import Coin from "./pages/coins/coin/Coin.jsx";
 import Transactions from "./pages/transactions/Transactions";
 import Login from "./pages/login/Login";
-import CoinsList from "./components/coinsList/CoinsList";
 
 function App() {
   const [isOpen, toggle] = useToggle(false);
@@ -26,7 +25,7 @@ function App() {
             <Sidebar isOpen={isOpen} toggle={toggle} />
             <MainContainerWMargins isOpen={isOpen}>
               <Switch>
-                <PrivateRoute path="/coins/:coin" component={CoinsList} />
+                <PrivateRoute path="/coins/:coin" component={Coin} />
                 <PrivateRoute path="/coins" component={Coins} />
                 <PrivateRoute path="/transactions" component={Transactions} />
                 <PrivateRoute path="/home" component={Home} />
