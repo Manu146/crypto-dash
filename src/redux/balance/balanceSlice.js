@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const userBalances = [
   {
@@ -72,24 +72,58 @@ const fakeUpdatePrices = (balances) => {
   });
 };*/
 
+const fakeApiCall = (transactionDetails) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (transactionDetails) resolve(transactionDetails);
+      reject("Error");
+    }, 1500);
+  });
+};
+
+export const processTransaction = createAsyncThunk(
+  "balances/transaction",
+  async (transactionDetails) => {
+    const response = await fakeApiCall(transactionDetails);
+    return response;
+  }
+);
+
 const balanceSlice = createSlice({
   name: "balances",
-  initialState: [],
+  initialState: {
+    balances: [],
+    status: "idle",
+  },
   reducers: {
     getBalances: (state) => {
-      return userBalances;
+      state.balances = userBalances;
     },
-    reduceBalance: (state, action) => {
+    clearStatus: (state) => {
+      state.status = "idle";
+    },
+  },
+  extraReducers: {
+    [processTransaction.pending]: (state, action) => {
+      state.status = "loading";
+    },
+    [processTransaction.fulfilled]: (state, action) => {
+      state.status = "succeeded";
       const { amount, account } = action.payload;
-      let balance = state.find((balance) => balance.id === account);
+      let balance = state.balances.find((balance) => balance.id === account);
       if (balance) {
         balance.amount -= amount;
       }
+    },
+    [processTransaction.rejected]: (state, action) => {
+      state.status = "failed";
+      state.error = action.error.message;
     },
   },
 });
 
 export default balanceSlice.reducer;
-export const { reduceBalance, getBalances } = balanceSlice.actions;
+export const { getBalances, clearStatus } = balanceSlice.actions;
 
-export const balancesSelector = (state) => state.balances;
+export const balancesSelector = (state) => state.balances.balances;
+export const statusSelector = (state) => state.balances.status;
