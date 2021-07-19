@@ -9,14 +9,24 @@ const StyledForm = styled.form`
 `;
 
 const SearchInput = styled.input`
-  background-color: var(--light-bg-secondary);
+  background-color: ${({ theme }) =>
+    theme.mode === "light"
+      ? "var(--light-bg-secondary)"
+      : "var(--dark-bg-secondary)"};
   border-radius: 0.75rem 0 0 0.75rem;
+  color: ${({ theme }) =>
+    theme.mode === "light"
+      ? "var(--light-primary-text)"
+      : "var(--dark-primary-text)"};
   border: 2px solid transparent;
   transition: border 0.2s ease;
   padding: 0.5rem 0.75rem;
   flex-grow: 1;
   &:focus {
-    border-color: var(--light-primary-text);
+    border-color: ${({ theme }) =>
+      theme.mode === "light"
+        ? "var(--light-primary-text)"
+        : "var(--dark-primary-text)"};
   }
 `;
 
