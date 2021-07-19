@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import useFormValidation from "../../custom-hooks/useFormValidation";
 import { DefaultContainer } from "../layout/DefaultContainer";
+import toast from "react-hot-toast";
 import {
   InputBox,
   Input,
@@ -17,9 +18,13 @@ import {
 import CurrencyInput from "./CurrencyInput/CurrencyInput";
 import LinkButton from "../common/LinkButton";
 import LoadingDots from "../loadingDots/LoadingDots";
-import { reduceBalance } from "../../redux/balance/balanceSlice";
+import {
+  processTransaction,
+  balancesSelector,
+  statusSelector,
+  clearStatus,
+} from "../../redux/balance/balanceSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { balancesSelector } from "../../redux/balance/balanceSlice";
 
 const validations = {
   userAccount: {
@@ -60,6 +65,7 @@ export default function TransactionForm({ userAccounts, networks }) {
   const [userAccount, setUserAccount] = useState();
   const [amount, setAmount] = useState("");
   const balances = useSelector(balancesSelector);
+  const status = useSelector(statusSelector);
 
   const [network, setNetwork] = useState();
   const [account, setAccount] = useState("");
@@ -83,7 +89,7 @@ export default function TransactionForm({ userAccounts, networks }) {
   };
 
   const submitTransaction = (payload) => {
-    dispatch(reduceBalance(payload));
+    dispatch(processTransaction(payload));
   };
 
   const formatNumberView = (n) =>
@@ -111,6 +117,23 @@ export default function TransactionForm({ userAccounts, networks }) {
   useEffect(() => {
     setAccount("");
   }, [network]);
+
+  useEffect(() => {
+    if (status === "succeeded") {
+      toast.success("succeeded", { duration: 1000 });
+      setAmount("");
+      setAccount("");
+      clearStatus();
+    }
+
+    if (status === "failed") {
+      toast.error(
+        "Transaction cannot be completed right now. Please, try again later",
+        { duration: 1000 }
+      );
+      clearStatus();
+    }
+  }, [status]);
 
   let accountOptions = balances?.filter((account) => {
     if (!userAccount) return account;
@@ -219,8 +242,14 @@ export default function TransactionForm({ userAccounts, networks }) {
           </ListContainer>
         </InputBox>
       </DefaultContainer>
-      <LinkButton as="button" size="large" width="40" onClick={handleSubmit}>
-        Send
+      <LinkButton
+        as="button"
+        size="large"
+        width="40"
+        onClick={handleSubmit}
+        disabled={status === "loading"}
+      >
+        {status === "loading" ? <LoadingDots /> : "Send"}
       </LinkButton>
     </StyledForm>
   );
