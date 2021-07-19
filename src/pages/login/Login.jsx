@@ -112,7 +112,7 @@ export default function Login() {
   useEffect(() => {
     if (status === "succeeded") {
       dispatch(getBalances());
-      toast.success("Logged in", { duration: 1500 });
+      toast.success("Logged in", { duration: 1000 });
       setTimeout(() => {
         history.push("/home");
       }, 1500);
