@@ -23,10 +23,8 @@ const SearchInput = styled.input`
   padding: 0.5rem 0.75rem;
   flex-grow: 1;
   &:focus {
-    border-color: ${({ theme }) =>
-      theme.mode === "light"
-        ? "var(--light-primary-text)"
-        : "var(--dark-primary-text)"};
+    border-color: var(--brand-color);
+    outline: none;
   }
 `;
 
