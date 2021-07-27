@@ -18,8 +18,9 @@ import LoadingDots from "../../components/loadingDots/LoadingDots";
 const Container = styled(DefaultContainer)`
   width: 100%;
   margin: 0 auto;
+  margin-top: 6rem;
   @media only screen and (min-width: 768px) {
-    width: 40%;
+    width: 35%;
   }
 `;
 
