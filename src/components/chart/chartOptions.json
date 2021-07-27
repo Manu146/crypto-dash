@@ -17,7 +17,8 @@
       "visible": false
     },
     "horzLines": {
-      "color": "#f0f3fa"
+      "color": "#f0f3fa",
+      "visible": false
     }
   }
 }
