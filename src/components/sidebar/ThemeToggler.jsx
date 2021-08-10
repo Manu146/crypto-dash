@@ -12,6 +12,8 @@ const ToggleButton = styled.button`
       : "var(--dark-bg-secondary)"};
   border-radius: 0.5rem;
   transition: background 0.2s ease-in, margin-left 0.3s ease-in;
+  flex-basis: 25%;
+  flex-shrink: 0;
   &:hover {
     background-color: ${({ theme }) =>
       theme.mode === "light" ? "#caf0ff" : "#2C2F49"};
@@ -24,6 +26,11 @@ const ToggleButton = styled.button`
     & svg {
       fill: ${({ theme }) => (theme.mode === "light" ? "#3d3d3d" : "#9289DE")};
     }
+  }
+
+  @media only screen and (min-width: 768px) {
+    flex-basis: auto;
+    flex-shrink: 1;
   }
 `;
 

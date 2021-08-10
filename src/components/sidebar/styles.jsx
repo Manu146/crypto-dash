@@ -27,7 +27,7 @@ export const SidebarContainer = styled.nav`
 
   display: flex;
 
-  flex-direction: column;
+  flex-direction: row;
 
   @media only screen and (min-width: 768px) {
     top: 0;
@@ -39,6 +39,8 @@ export const SidebarContainer = styled.nav`
     flex-grow: 0;
 
     flex-shrink: 0;
+
+    flex-direction: column;
 
     width: ${({ isOpen }) => (isOpen ? "15rem" : "5rem")};
 
@@ -58,6 +60,8 @@ export const SidebarUl = styled.ul`
 
   flex-direction: row;
 
+  flex: 1;
+
   gap: 0.5rem;
 
   list-style: none;
@@ -74,7 +78,7 @@ export const SidebarUl = styled.ul`
     }
 
     flex-direction: column;
-
+    flex: 0;
     margin-bottom: auto;
   }
 `;
