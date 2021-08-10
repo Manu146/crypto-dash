@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-//import { DefaultContainer } from "../../components/layout/DefaultContainer";
+import { useState } from "react";
 import CoinsList from "../../components/coinsList/CoinsList";
 import SearchComp from "../../components/searchComp/SearchComp";
 
