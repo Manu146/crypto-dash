@@ -57,9 +57,20 @@ const Form = styled.form`
 
 const InputBox = styled.div`
   display: flex;
-  background-color: var(--light-bg-secondary);
+  background-color: ${({ theme }) =>
+    theme.mode === "light"
+      ? "var(--light-bg-secondary)"
+      : "var(--dark-bg-secondary)"};
+  color: ${({ theme }) =>
+    theme.mode === "light"
+      ? "var(--light-primary-text)"
+      : "var(--dark-primary-text)"};
   padding: 0.5rem;
-  border: 2px solid var(--light-bg-primary);
+  border: 2px solid
+    ${({ theme }) =>
+      theme.mode === "light"
+        ? "var(--light-bg-primary)"
+        : "var(--dark-bg-primary)"};
   border-radius: 0.75rem;
   align-items: center;
   margin-bottom: 0.5rem;
@@ -75,6 +86,10 @@ const InputLabel = styled.label`
 `;
 
 const Input = styled.input`
+  color: ${({ theme }) =>
+    theme.mode === "light"
+      ? "var(--light-primary-text)"
+      : "var(--dark-primary-text)"};
   border: none;
   flex-grow: 1;
   padding: 0 1rem;
