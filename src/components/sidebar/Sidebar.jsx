@@ -18,10 +18,15 @@ import { authSelector } from "../../redux/auth/authSlice";
 import useIsAuthenticated from "../../custom-hooks/useIsAuthenticated";
 
 const sidebarItems = [
-  { text: "Home", icon: HomeIcon, path: "/home" },
-  { text: "Transactions", icon: TransactionIcon, path: "/transactions" },
-  { text: "Coins", icon: CoinsIcon, path: "/coins" },
-  { text: "Settings", icon: SettingsIcon, path: "/settings" },
+  { text: "Home", icon: HomeIcon, path: "/home", enabled: true },
+  {
+    text: "Transactions",
+    icon: TransactionIcon,
+    path: "/transactions",
+    enabled: true,
+  },
+  { text: "Coins", icon: CoinsIcon, path: "/coins", enabled: true },
+  { text: "Settings", icon: SettingsIcon, path: "/settings", enabled: false },
 ];
 
 export default function Sidebar({ isOpen, toggle }) {
@@ -40,9 +45,11 @@ export default function Sidebar({ isOpen, toggle }) {
         </ToggleButton>
       </SidebarHeader>
       <SidebarUl>
-        {sidebarItems.map((item, index) => (
-          <SidebarItem key={index} item={item} isOpen={isOpen} />
-        ))}
+        {sidebarItems
+          .filter((item) => item.enabled)
+          .map((item, index) => (
+            <SidebarItem key={index} item={item} isOpen={isOpen} />
+          ))}
       </SidebarUl>
       <ThemeToggler />
       {isAuth && (
