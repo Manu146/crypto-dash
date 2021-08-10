@@ -50,27 +50,14 @@ const userBalances = [
     img: "./coins-icons/svg/bat.svg",
     amount: 10.15,
   },
+  {
+    id: 8,
+    name: "US Dollar",
+    currency: "USD",
+    img: "./coins-icons/svg/usdfiat.svg",
+    amount: 25.45,
+  },
 ];
-
-/*const getUpdatedPrice = (oldPrice) => {
-  let max = oldPrice + oldPrice * 0.1;
-  let min = oldPrice - oldPrice * 0.1;
-  return Math.random() * (max - min) + min;
-};
-
-const getPriceChange = (oldPrice, newPrice) => {
-  return ((newPrice - oldPrice) * 100) / oldPrice;
-};
-
-const fakeUpdatePrices = (balances) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      let newBalances = balances.map((balance) => {
-        let newPrice = getUpdatedPrice(balance.price);
-      });
-    }, 2000);
-  });
-};*/
 
 const fakeApiCall = (transactionDetails) => {
   return new Promise((resolve, reject) => {

@@ -5,7 +5,7 @@ import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 import CoinsListItem from "./CoinsListItem";
 import { useSelector } from "react-redux";
 import { ratesSelector } from "../../redux/rates/ratesSlice";
-import { balancesSelector } from "../../redux/balance/balanceSlice";
+import coins from "../../coins-abbreviations.json";
 
 const compareLowerCase = (string1, string2) => {
   return string1.toLowerCase().includes(string2.toLowerCase());
@@ -16,10 +16,8 @@ const compareUpperCase = (string1, string2) => {
 };
 
 const filterCoins = (searchParameter, data) => {
-  return data.filter(
-    (coin) =>
-      compareLowerCase(coin.name, searchParameter) ||
-      compareUpperCase(coin.currency, searchParameter)
+  return data.filter((coin) =>
+    compareUpperCase(coin.currency, searchParameter)
   );
 };
 
@@ -35,7 +33,8 @@ const fakeAsync = (searchParameter, data) => {
 
 export default function CoinsList({ searchParameter }) {
   const rates = useSelector(ratesSelector);
-  const balances = useSelector(balancesSelector);
+  console.log(coins);
+  //const balances = useSelector(balancesSelector);
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -45,7 +44,7 @@ export default function CoinsList({ searchParameter }) {
       try {
         setLoading(true);
         setError(false);
-        let response = await fakeAsync(searchParameter, balances);
+        let response = await fakeAsync(searchParameter, coins);
         setResults(response);
         setLoading(false);
       } catch (error) {

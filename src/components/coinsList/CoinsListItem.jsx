@@ -66,7 +66,10 @@ export default function CoinsListItem({ coin }) {
     <li>
       <CoinLink to={"/coins/" + coin.currency.toLowerCase()}>
         <div>
-          <img src={coin.img} alt="" />
+          <img
+            src={`./coins-icons/svg/${coin.currency.toLowerCase()}.svg`}
+            alt=""
+          />
           <FlexContainer>
             <PrimaryTag>{coin.name}</PrimaryTag>
             <SecondaryTag>{coin.currency}</SecondaryTag>

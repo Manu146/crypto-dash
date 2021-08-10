@@ -89,9 +89,10 @@ export default function PortFolioCoins() {
   return (
     <DefaultContainer>
       <CoinsList>
-        {balances.map((coin, index) => (
-          <CoinItem coin={{ ...coin, ...rates[coin.currency] }} key={index} />
-        ))}
+        {balances.map((coin, index) => {
+          let ratesData = rates[coin.currency] || { price: 1, change: 0 };
+          return <CoinItem coin={{ ...coin, ...ratesData }} key={index} />;
+        })}
       </CoinsList>
     </DefaultContainer>
   );
