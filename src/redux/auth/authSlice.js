@@ -52,5 +52,7 @@ const authSlice = createSlice({
 
 export default authSlice.reducer;
 
+export const { clearStatus } = authSlice.actions;
+
 export const authSelector = (state) => state.auth.data;
 export const authStatusSelector = (state) => state.auth.status;
