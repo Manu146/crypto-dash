@@ -12,6 +12,6 @@ export default function PollingWrapper({ children, everyNSeconds }) {
     return () => {
       clearInterval(intv);
     };
-  }, []);
+  }, [dispatch]);
   return <>{children}</>;
 }
