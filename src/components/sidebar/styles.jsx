@@ -87,9 +87,7 @@ export const SidebarHeader = styled.div`
   display: none;
 
   align-items: center;
-
-  justify-content: center;
-
+  flex-direction: column;
   margin-bottom: auto;
 
   @media only screen and (min-width: 768px) {
@@ -98,15 +96,11 @@ export const SidebarHeader = styled.div`
 `;
 
 export const LogoLink = styled.a`
-  position: absolute;
-
-  left: ${({ isOpen }) => (isOpen ? "0" : "-999px")};
-
-  background-color: #9494ca;
-
-  margin-left: 1rem;
-
-  transition: left 0.3s ease-in;
+  width: 100%;
+  & svg {
+    width: 100%;
+    height: 46px;
+  }
 `;
 
 export const ToggleButton = styled.button`

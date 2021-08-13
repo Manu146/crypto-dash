@@ -16,6 +16,8 @@ import { ReactComponent as SidebarArrow } from "../../icons/sidebar-arrow.svg";
 import { useSelector } from "react-redux";
 import { authSelector } from "../../redux/auth/authSlice";
 import useIsAuthenticated from "../../custom-hooks/useIsAuthenticated";
+import { ReactComponent as FullLogo } from "../../icons/FullLogo.svg";
+import { ReactComponent as Logo } from "../../icons/Logo.svg";
 
 const sidebarItems = [
   { text: "Home", icon: HomeIcon, path: "/home", enabled: true },
@@ -35,14 +37,14 @@ export default function Sidebar({ isOpen, toggle }) {
   return (
     <SidebarContainer isOpen={isOpen}>
       <SidebarHeader>
-        <LogoLink href="#" isOpen={isOpen}>
-          <span>LOGO</span>
-        </LogoLink>
         <ToggleButton onClick={toggle} isOpen={isOpen}>
           <i>
             <SidebarArrow />
           </i>
         </ToggleButton>
+        <LogoLink href="#" isOpen={isOpen}>
+          {isOpen ? <FullLogo /> : <Logo />}
+        </LogoLink>
       </SidebarHeader>
       <SidebarUl>
         {sidebarItems
