@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  authSelector,
   authStatusSelector,
   login,
   clearStatus,
@@ -14,6 +13,7 @@ import LinkButton from "../../components/common/LinkButton";
 import useFormValidation from "../../custom-hooks/useFormValidation";
 import toast from "react-hot-toast";
 import LoadingDots from "../../components/loadingDots/LoadingDots";
+import { ErrorSpan } from "../../components/transactionForm/styles";
 
 const Container = styled(DefaultContainer)`
   width: 100%;
@@ -97,7 +97,7 @@ const validations = {
 export default function Login() {
   const history = useHistory();
   const status = useSelector(authStatusSelector);
-  const authData = useSelector(authSelector);
+  //const authData = useSelector(authSelector);
   const [loginData, setLogin] = useState({ email: "", password: "" });
   const dispatch = useDispatch();
   const { handleSubmit, errors } = useFormValidation(
@@ -106,20 +106,24 @@ export default function Login() {
     () => onSubmitLogin(loginData.email, loginData.password)
   );
   const onSubmitLogin = (email, password) => {
-    console.log(email, password);
     dispatch(login({ email, password }));
   };
 
   useEffect(() => {
     if (status === "succeeded") {
       dispatch(getBalances());
+      dispatch(clearStatus());
       toast.success("Logged in", { duration: 1000 });
       setTimeout(() => {
         history.push("/home");
-      }, 1500);
+      }, 1000);
     }
-    if (status === "failed") toast.error("An error ocurred, try again later.");
-  }, [status]);
+    console.log(status);
+    if (status === "failed") {
+      toast.error("An error ocurred, try again later.");
+      dispatch(clearStatus());
+    }
+  }, [status, dispatch, history]);
   return (
     <>
       <Container>
@@ -134,6 +138,7 @@ export default function Login() {
                 setLogin((prev) => ({ ...prev, email: e.target.value }))
               }
             />
+            {errors.email && <ErrorSpan>{errors.email}</ErrorSpan>}
           </InputContainer>
           <InputContainer>
             <InputLabel>Password</InputLabel>
@@ -144,6 +149,7 @@ export default function Login() {
                 setLogin((prev) => ({ ...prev, password: e.target.value }))
               }
             />
+            {errors.password && <ErrorSpan>{errors.password}</ErrorSpan>}
           </InputContainer>
           <LinkButton
             onClick={(e) => handleSubmit(e)}
