@@ -10,10 +10,6 @@ import coins from "../../coins-abbreviations.json";
 import { ReactComponent as Searching } from "../../icons/searching.svg";
 import { ReactComponent as NotFound } from "../../icons/not_found.svg";
 
-const compareLowerCase = (string1, string2) => {
-  return string1.toLowerCase().includes(string2.toLowerCase());
-};
-
 const compareUpperCase = (string1, string2) => {
   return string1.includes(string2.toUpperCase());
 };
